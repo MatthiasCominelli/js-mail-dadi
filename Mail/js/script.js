@@ -5,27 +5,43 @@
 // controlla che sia nella lista di chi può accedere,
 // stampa un messaggio appropriato sull’esito del controllo.
 
+//creo la lista delle email che possono fare il login
+const ListaEmail = ['matticomi12@gmail.com', 'giacomino02@gmail.com', 'AlbertoAngela@gmail.com', 'ForzaRomasempre@gmail.com'];
 
-const EmailInserita = document.getElementById("RisultatoEmail");
-//iniziamo col chiedere una email all'utente
+//prendo gli elementi dall'HTML
 
-let EmailUtente = prompt("Inserisci la tua email")
-// console.log(emailutente);
+let btn = document.querySelector('button');
+let risp = document.getElementById('risposta');
 
-//ora bisogna designare una lista di email che hanno la possibilità di accedere al sito attraverso a un array
+//creo il loop che scannerizzi l'array
 
-const ListaEmail = ['matticomi12@gmail.com', 'giacomino02@gmail.com', 'AlbertoAngela@gmail.com', 'ForzaRomasempre@gmail.com'] 
-// console.log(ListaEmail);
+let mailRegistered;
 
-//ora dobbiamo controllare con un if se l'email dell'utente è all'interno della lista
+const check = function(){
+    let emailUtente = document.getElementById('usermail');
+    let mailRegistered;
 
-for (let i = 0; i < ListaEmail.length; i++){
+    for (let i = 0; i < ListaEmail.length; i++) {
 
-    if (ListaEmail[i] === EmailUtente) {
-        EmailInserita.innerHTML = "La tua email può accedere.";
-        break;
+        if (emailUtente.value === ListaEmail[i]) {
+
+            mailRegistered = true;
+
+        }
     }
-    else{
-        EmailInserita.innerHTML = "La tua email non può accedere";
-    }    
-    }
+    // creo una risposta 
+    risp.innerHTML = '';
+    let answer = document.createElement('div');
+
+    if(mailRegistered){
+        answer.textContent = "Bentornato"
+    }else{
+        answer.textContent = "Non hai ancora creato un account?"
+    };
+
+    risp.append(answer)
+};
+
+// creo un evento che mi faccia funzionare il click sul bottone
+
+btn.addEventListener('click', check);
